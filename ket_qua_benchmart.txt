@@ -1,0 +1,53 @@
+﻿=======================================================
+🚀 CHẠY BENCHMARK: Chiến lược [RecursiveChunker (Đỗ Hoàng Quân)]
+=======================================================
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights: 100%|████████████████████████████████████████████████| 199/199 [00:00<00:00, 2373.68it/s]
+  -> Sử dụng: LocalEmbedder (sentence-transformers)
+  -> Tìm thấy 5 file Markdown trong data\shopee_refund/
+  -> Tổng số Chunks: 356 | Độ dài TB: 349.3 ký tự
+
+--- KẾT QUẢ TOP-1 TRUY XUẤT CHO 5 BENCHMARK QUERIES ---
+
+[Câu 1]: Người mua có bao nhiêu ngày để yêu cầu trả hàng hoàn tiền sau khi giao hàng thành công?
+  Filter: {'audience': 'buyer'}
+  Top-1 ID: shopee-dam-bao#2 | Score: 0.7854
+  Trích đoạn: Trong trường hợp Người mua nhận được sản phẩm khác với mô tả hoặc bị hư hỏng, Người mua có...
+  Relevant: Có
+
+[Câu 2]: Khi Shopee đang xem xét yêu cầu trả hàng hoàn tiền thì bao lâu có kết quả?
+  Filter: None
+  Top-1 ID: quy-dinh-nguoi-ban-shopee-mall#32 | Score: 0.8373
+  Trích đoạn: a.  Trong hầu hết các trường hợp, Shopee sẽ xử lý và đưa ra quyết định cuối cùng liên quan...
+  Relevant: Cần kiểm tra
+
+[Câu 3]: Sau khi được chấp nhận trả hàng và hoàn tiền người mua phải gửi hàng trong bao lâu?
+  Filter: None
+  Top-1 ID: shopee-dam-bao#2 | Score: 0.7443
+  Trích đoạn: Trong trường hợp Người mua nhận được sản phẩm khác với mô tả hoặc bị hư hỏng, Người mua có...
+  Relevant: Cần kiểm tra
+
+[Câu 4]: Điều kiện bảo hành cơ bản trên Shopee gồm những gì?
+  Filter: None
+  Top-1 ID: chinh-sach-bao-hanh-shopee#31 | Score: 0.7385
+  Trích đoạn: Các điều kiện bảo hành được liệt kê dưới đây là các điều kiện cơ bản mà Shopee khuyến cáo ...
+  Relevant: Có
+
+[Câu 5]: Hủy đơn do hết hàng hoặc không xác nhận đúng hạn thì bị phí bao nhiêu?
+  Filter: {'audience': 'seller'}
+  Top-1 ID: quy-dinh-nguoi-ban-shopee-mall#86 | Score: 0.5938
+  Trích đoạn: 2.12.  Phí  ...
+  Relevant: Có
+
+-------------------------------------------------------
+🔬 A/B TEST CHO CÂU 5: Ảnh hưởng của metadata_filter
+-------------------------------------------------------
+▶ KHI CÓ FILTER {'audience': 'seller'}:
+   Top-1: quy-dinh-nguoi-ban-shopee-mall#86 (Score: 0.5938) [audience: seller]
+   Top-2: quy-dinh-nguoi-ban-shopee-mall#91 (Score: 0.5790) [audience: seller]
+   Top-3: quy-dinh-nguoi-ban-shopee-mall#32 (Score: 0.5388) [audience: seller]
+
+▶ KHI KHÔNG CÓ FILTER:
+   Top-1: quy-dinh-nguoi-ban-shopee-mall#86 (Score: 0.5938) [audience: seller]
+   Top-2: shopee-dam-bao#1 (Score: 0.5843) [audience: buyer]
+   Top-3: quy-dinh-nguoi-ban-shopee-mall#91 (Score: 0.5790) [audience: seller]

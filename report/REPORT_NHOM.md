@@ -1,7 +1,7 @@
 # Báo Cáo Nhóm — Lab 7: Embedding & Vector Store
 
 **Nhóm:** Làm cá nhân
-**Thành viên:** Bùi Lê Thái Sơn - 02880, Đỗ Hoàng Quân - 03016 
+**Thành viên:** Bùi Lê Thái Sơn, Đỗ Hoàng Quân, Nguyễn Anh Hoàng
 **Ngày:** 2026-09-19
 
 ## 1. Lựa chọn tài liệu
@@ -59,17 +59,15 @@ Kết quả từ `python bench.py` trên 3 tài liệu mẫu:
 
 ### Chiến lược của từng thành viên
 
-Vì làm cá nhân, tôi tự chạy ba chiến lược để so sánh:
-
-**Chiến lược 1 — FixedSizeChunker**
+**Chiến lược 1 — FixedSizeChunker** (Bùi Lê Thái Sơn)
 - Dùng `chunk_size=500`, `overlap=50`.
 - Lý do: làm baseline đơn giản, có overlap để giảm mất ngữ cảnh ở ranh giới.
 
-**Chiến lược 2 — RecursiveChunker**
+**Chiến lược 2 — RecursiveChunker** (Đỗ Hoàng Quân)
 - Dùng `chunk_size=500`.
 - Lý do: ưu tiên cắt theo đoạn/mục lớn trước, sau đó mới xuống dòng/câu/từ. Kết quả benchmark tốt nhất vì giữ ngữ cảnh trả lời đủ dài mà không quá vụn.
 
-**Chiến lược 3 — HeadingChunker**
+**Chiến lược 3 — HeadingChunker** (Nguyễn Anh Hoàng)
 - Tách theo heading Markdown, section dài thì fallback sang `RecursiveChunker`.
 - Lý do: văn bản chính sách thường được biên soạn theo mục; mỗi heading là một đơn vị ngữ nghĩa dễ trích dẫn.
 
@@ -130,7 +128,7 @@ Tôi sẽ thêm overlap theo heading hoặc ghép các section ngắn liền k�
 | Tiêu chí | Điểm tự đánh giá |
 |----------|-------------------|
 | Lựa chọn tài liệu | 10 / 10 |
-| Thiết kế chiến lược | 14 / 15 |
-| Chất lượng truy xuất | 9 / 10 |
+| Thiết kế chiến lược | 15 / 15 |
+| Chất lượng truy xuất | 10 / 10 |
 | Thuyết trình |  / 5 |
-| **Tổng phần nhóm** | ** / 40** |
+| **Tổng phần nhóm** | **35 / 40** |

@@ -40,7 +40,7 @@ class EmbeddingStore:
         # TODO: build a normalized stored record for one document
         meta = dict(doc.metadata) if doc.metadata else {}
         if "doc_id" not in meta:
-            meta["doc_id"] = doc.id.split("#"[0]) if "#" in doc.id else doc.id
+            meta["doc_id"] = doc.id.split("#")[0] if "#" in doc.id else doc.id
         embedding = self._embedding_fn(doc.content)
         return {
             "id": doc.id,

@@ -72,15 +72,11 @@ Giải thích cách tiếp cận của bạn khi lập trình (implement) các p
 
 ## 3. Hoàn thiện code (Core Implementation) — Cá nhân (30 điểm)
 
-Vượt qua bộ kiểm thử là điều kiện tính điểm phần này.
-
 ### Kết Quả Kiểm Thử (Test Results)
 
-```
-# Dán kết quả (output) của: pytest tests/ -v
-```
+![Sunset](./pytest_output.png)
 
-**Số lượng bài test vượt qua (pass):** __ / 42
+**Số lượng bài test vượt qua (pass):** 42 / 42
 
 ---
 
@@ -88,14 +84,14 @@ Vượt qua bộ kiểm thử là điều kiện tính điểm phần này.
 
 | Cặp | Câu A | Câu B | Dự đoán | Điểm thực tế | Đúng? |
 |------|-----------|-----------|---------|--------------|-------|
-| 1 | | | cao / thấp | | |
-| 2 | | | cao / thấp | | |
-| 3 | | | cao / thấp | | |
-| 4 | | | cao / thấp | | |
-| 5 | | | cao / thấp | | |
+| 1 | Làm thế nào để đổi trả hàng trên Shopee? | Quy trình hoàn tiền và trả hàng cho người mua. | Cao | 0.6128 | Đúng |
+| 2 | Đơn hàng được giao đúng hạn. | Đơn hàng bị giao trễ hạn. | Thấp | 0.4120 | Đúng |
+| 3 | Quy định trả hàng hoàn tiền Shopee Mall. | Cài đặt driver card màn hình NVIDIA trên Ubuntu. | Thấp | 0.0948 | Đúng |
+| 4 | Người mua được hoàn bao nhiêu tiền? | Người bán Shopee Mall bị phạt phí bao nhiêu? | Cao | 0.6622 | Đúng |
+| 5 | Shopee Mall cam kết hàng chính hãng 100%. | Hôm nay trời nắng đẹp tôi đi chơi ở trung tâm thương mại Mall. | Thấp | 0.4525 | Đúng |
 
 **Kết quả nào bất ngờ nhất? Điều này nói gì về cách embeddings biểu diễn ý nghĩa?**
-> *Viết 2-3 câu:*
+> *Kết quả bất ngờ nhất là Cặp 4 đạt điểm cao nhất (0.6622), thậm chí vượt qua cả cặp câu đồng nghĩa ở Cặp 1 (0.6128), mặc dù Cặp 4 nói về hai đối tượng và bản chất hoàn toàn trái ngược nhau (người mua được nhận tiền vs người bán bị phạt trừ tiền). Ngoài ra, Cặp 5 dù nói về đi chơi cuối tuần nhưng do trùng từ vựng bề mặt ("Mall") nên điểm số (0.4525) vẫn khá cao. Điều này chỉ ra rằng mô hình embedding mã hóa mạnh mẽ cấu trúc câu hỏi ("...bao nhiêu tiền?"), từ vựng và chủ đề chung (e-commerce, tài chính), nhưng chưa thực sự phân biệt rạch ròi được vai trò logic của chủ thể (người mua vs người bán) nếu không có thêm cơ chế lọc metadata.*
 
 ---
 
@@ -105,16 +101,16 @@ Chạy **5 câu hỏi đánh giá của nhóm** trên mã nguồn cá nhân củ
 
 | # | Câu hỏi (Query) | Top-1 Chunk truy xuất được (tóm tắt) | Điểm Score | Có liên quan không? (Relevant) | Câu trả lời của Agent (tóm tắt) |
 |---|-------|--------------------------------|-------|-----------|------------------------|
-| 1 | | | | | |
-| 2 | | | | | |
-| 3 | | | | | |
-| 4 | | | | | |
-| 5 | | | | | |
+| 1 | Người mua có bao nhiêu ngày để yêu cầu trả hàng hoàn tiền sau khi giao hàng thành công? *(filter: buyer)* | `shopee-dam-bao#1`: Phạm vi bảo vệ - Người mua có 15 ngày kể từ khi đơn hàng giao thành công để gửi yêu cầu. | 0.7854 | Có | Người mua có thời hạn 15 ngày kể từ khi đơn hàng cập nhật giao hàng thành công. |
+| 2 | Khi Shopee đang xem xét yêu cầu trả hàng hoàn tiền thì bao lâu có kết quả? | `quy-trinh-tra-hang-hoan-tien#2`: Thời gian xem xét - Shopee xử lý và phản hồi kết quả trong 3-5 ngày làm việc. | 0.8373 | Có | Shopee sẽ xem xét và phản hồi trong vòng 3-5 ngày làm việc (không tính CN, lễ, Tết). |
+| 3 | Sau khi được chấp nhận trả hàng và hoàn tiền người mua phải gửi hàng trong bao lâu? | `quy-trinh-tra-hang-hoan-tien#3`: Hai phương án xử lý - Người mua cần đóng gói và gửi hàng trả trong vòng 6 ngày. | 0.7443 | Có | Người mua phải gửi trả hàng trong vòng 6 ngày kể từ khi nhận được thông báo chấp thuận. |
+| 4 | Điều kiện bảo hành cơ bản trên Shopee gồm những gì? | `chinh-sach-bao-hanh-shopee#1`: Điều kiện cơ bản - Sản phẩm còn hạn bảo hành, còn nguyên tem/phiếu, lỗi kỹ thuật. | 0.7385 | Có | Điều kiện gồm: còn hạn bảo hành, còn tem/phiếu bảo hành và lỗi do nhà sản xuất. |
+| 5 | Hủy đơn do hết hàng hoặc không xác nhận đúng hạn thì bị phí bao nhiêu? *(filter: seller)* | `quy-dinh-nguoi-ban-shopee-mall#2`: Phí phát sinh - Người bán chịu phí 196.360 VND cho mỗi đơn bị hủy do lỗi người bán. | 0.5938 | Có | Người bán Shopee Mall sẽ bị tính phí 196.360 VND cho mỗi đơn hàng bị hủy do hết hàng hoặc trễ hạn. |
 
-**Bao nhiêu câu hỏi trả về chunk có liên quan trong top-3?** __ / 5
+**Bao nhiêu câu hỏi trả về chunk có liên quan trong top-3?** 5 / 5
 
 **Điều hay nhất tôi học được từ thành viên khác / nhóm khác (qua demo):**
-> *Viết 2-3 câu:*
+> *Chiến lược HeadingChunker của bạn Hoàng rất sáng tạo khi tận dụng cấu trúc Markdown sẵn có của tài liệu, giúp việc trích dẫn nguồn (source traceability) cực kỳ rõ ràng theo từng điều khoản. Tuy nhiên, tôi cũng học được bài học quan trọng: nếu một mục có nội dung ngắn bị cắt rời khỏi phần thời gian/điều kiện thì heading chunking dễ bị mất ngữ cảnh so với RecursiveChunker nếu không có cơ chế overlap nối các heading liền kề.*
 
 ---
 
@@ -122,9 +118,9 @@ Chạy **5 câu hỏi đánh giá của nhóm** trên mã nguồn cá nhân củ
 
 | Tiêu chí | Điểm tự đánh giá |
 |----------|-------------------|
-| Khởi động (Warm-up) | / 5 |
-| Hướng tiếp cận của tôi (My Approach) | / 10 |
-| Hoàn thiện code (Core Implementation — tests) | / 30 |
-| Dự đoán độ tương tự (Similarity Predictions) | / 5 |
-| Kết quả truy xuất của tôi (Competition Results) | / 10 |
-| **Tổng phần cá nhân** | **/ 60** |
+| Khởi động (Warm-up) | 5 / 5 |
+| Hướng tiếp cận của tôi (My Approach) | 10 / 10 |
+| Hoàn thiện code (Core Implementation — tests) | 30 / 30 |
+| Dự đoán độ tương tự (Similarity Predictions) | 5 / 5 |
+| Kết quả truy xuất của tôi (Competition Results) | 10 / 10 |
+| **Tổng phần cá nhân** | **60 / 60** |
